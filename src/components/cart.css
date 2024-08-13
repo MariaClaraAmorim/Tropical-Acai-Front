@@ -1,0 +1,273 @@
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 350px;
+    background-color: var(--primary-color);
+    box-shadow: -2px 0 6px rgba(0, 0, 0, 0.3);
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+.sidebar.open {
+    transform: translateX(0);
+}
+
+.sidebar .close-btn {
+    background: none;
+    border: none;
+    font-size: 28px;
+    color: var(--secondary-color);
+    cursor: pointer;
+    align-self: flex-end;
+}
+
+.sidebar h2 {
+    color: var(--secondary-color);
+    font-size: 28px;
+    text-align: center;
+}
+
+.cart-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    font-size: 20px;
+    border-bottom: 1px solid var(--secondary-color);
+    color: var(--secondary-color);
+}
+
+.item-name {
+    flex: 2;
+    font-size: 18px;
+}
+
+.item-price {
+    flex: 1;
+    text-align: right;
+    font-size: 18px;
+}
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.action-btn {
+    background: var(--secondary-color);
+    border: none;
+    color: var(--primary-color);
+    font-size: 20px;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.3s, color 0.3s;
+}
+
+.action-btn:hover {
+    background: var(--primary-color);
+    color: var(--secondary-color);
+}
+
+.remove-btn {
+    background: red;
+}
+
+.remove-btn:hover {
+    background: darkred;
+}
+
+.cart-summary {
+    font-size: 18px;
+    color: var(--secondary-color);
+}
+
+.coupon-container {
+    margin-top: 20px;
+}
+
+.coupon-card {
+    background: var(--secondary-color);
+    color: var(--primary-color);
+    padding: 15px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.coupon-img img {
+    width: 50px;
+    height: 50px;
+}
+
+.coupon-details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.coupon-details input {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    color: var(--primary-color);
+}
+.empty-cart-message {
+    text-align: center;
+    font-size: 18px;
+    color: var(--secondary-color);
+}
+
+.container {
+    background-color: var(--primary-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.card {
+    width: 350px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    background-color: var(--secondary-color);
+    padding: 10px;
+    position: relative;
+}
+
+.card::after,
+.card::before {
+    position: absolute;
+    content: "";
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+}
+
+.card::after {
+    right: -15px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.card::before {
+    left: -15px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.co-img img {
+    width: 80px;
+    height: 80px;
+    border-radius: 5px;
+}
+
+.vertical {
+    border-left: 2px dotted black;
+    height: 80px;
+    position: absolute;
+    left: 50%;
+    top: 1rem;
+}
+
+.content {
+    margin-left: 100px;
+}
+
+.content h2 {
+    font-size: 18px;
+    color: #565656;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.buy {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.cupom {
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+}
+
+.cupom input {
+    height: 45px;
+    width: 100px;
+    font-size: large;
+}
+
+.cep-search {
+
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    padding: 20px;
+    background-color: #f8f8f8;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo do campo de entrada de texto */
+.cep-search input {
+    flex: 1;
+    font-size: 14px;
+    width: 100px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+/* Estilo do campo de entrada quando em foco */
+.cep-search input:focus {
+    border-color: var(--primary-color);
+}
+
+/* Estilo do botão */
+.cep-search button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: var(--secondary-color);
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Estilo do botão quando em foco */
+.cep-search button:hover {
+    background-color: #5a0f5d;
+}
+
+/* Estilo do botão quando em foco */
+.cep-search button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.2);
+}
