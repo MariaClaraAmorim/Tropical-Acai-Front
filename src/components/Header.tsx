@@ -17,7 +17,6 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ handleLogout }) => {
     const userRole = localStorage.getItem('userType');
-    const clientName = localStorage.getItem('clientName');
 
     const [isCartOpen, setIsCartOpen] = useState(false);
     const { cart } = useCart();
@@ -53,9 +52,6 @@ const Header: React.FC<HeaderProps> = ({ handleLogout }) => {
                             <CiSettings />
                             <p className="none">Configuração</p>
                         </Link>
-                        
-                        <p>Bem vindo, {clientName}</p>
-
                         <button onClick={handleLogout}>
                             <BiLogOut />
                             <p className="none">Logout</p>
@@ -80,7 +76,6 @@ const Header: React.FC<HeaderProps> = ({ handleLogout }) => {
                             <RiCoupon2Line />
                             <p className="none">Pedidos</p>
                         </Link>
-                        <p>Bem vindo, {clientName}</p>
                         <button onClick={handleLogout}>
                             <BiLogOut />
                             <p className="none">Logout</p>

@@ -65,7 +65,7 @@ const Cart: React.FC<{ isOpen: boolean; toggleCart: () => void }> = ({ isOpen, t
         }
 
         const totalAmountRounded = parseFloat(cart.totalAmount.toFixed(2));
-        const clientName = localStorage.getItem('clientName'); // Recupera o nome do cliente
+        const clientName = localStorage.getItem('clientName') || 'Cliente Anônimo'; // Obtendo o nome do cliente
 
         // Separar itens normais dos personalizados
         const customOrders = cart.items.filter(item => item.customOrder);
