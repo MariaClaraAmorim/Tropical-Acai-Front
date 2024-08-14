@@ -15,10 +15,12 @@ interface LoginProps {
 const Login: React.FC<LoginProps> = ({ setIsLoggedIn, setUserType, setClientId, setName }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
       const response = await axios.post('https://tropical-acai-back.onrender.com/api/login', { email, password });
       const { clientId, userType, name } = response.data;
@@ -41,6 +43,8 @@ const Login: React.FC<LoginProps> = ({ setIsLoggedIn, setUserType, setClientId, 
       }
     } catch (error) {
       toast.error('Erro de login');
+    } finally {
+      setIsLoading(false); // Desativa o loading após a resposta
     }
   };
 
@@ -65,7 +69,9 @@ const Login: React.FC<LoginProps> = ({ setIsLoggedIn, setUserType, setClientId, 
             required
             autoComplete="password"
           />
-          <button type="submit">Login</button>
+          <button type="submit" disabled={isLoading}>
+            {isLoading ? 'Carregando...' : 'Login'} {/* Exibe o texto de carregamento */}
+          </button>
 
           <span className="redirect">
             Ainda não fez seu cadastro?

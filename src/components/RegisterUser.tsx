@@ -13,9 +13,11 @@ const RegisterUser: React.FC = () => {
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
     const [role, setRole] = useState<Role>(Role.USER);
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
+        setIsLoading(true);
 
         try {
             await axios.post('https://tropical-acai-back.onrender.com/api/register', {
@@ -31,6 +33,8 @@ const RegisterUser: React.FC = () => {
             setRole(Role.USER);
         } catch (err: any) {
             toast.error(err.response?.data?.error || 'Erro, tente novamente mais tarde');
+        } finally {
+            setIsLoading(false); // Desativa o loading após a resposta
         }
     };
 
@@ -48,7 +52,7 @@ const RegisterUser: React.FC = () => {
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
                                 required
-                                  autoComplete="name"
+                                autoComplete="name"
                             />
                         </div>
                         <label htmlFor="email">Email:</label>
@@ -58,7 +62,7 @@ const RegisterUser: React.FC = () => {
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             required
-                              autoComplete="email"
+                            autoComplete="email"
                         />
                     </div>
                     <div>
@@ -69,7 +73,7 @@ const RegisterUser: React.FC = () => {
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required
-                              autoComplete="password"
+                            autoComplete="password"
                         />
                     </div>
 
@@ -90,7 +94,7 @@ const RegisterUser: React.FC = () => {
                         color: 'var(--secondary-color)',
                         padding: '10px',
                         fontSize: '18px'
-                    }} type="submit" > Register</button>
+                    }} type="submit" disabled={isLoading}>  {isLoading ? 'Carregando...' : 'Cadastrar'}</button>
                 </form>
             </div>
         </div >

@@ -9,16 +9,22 @@ const Register: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
+
     try {
       await axios.post('https://tropical-acai-back.onrender.com/api/register', { email, password, name });
       toast.success('Cadastro realizado com sucesso');
       navigate('/login');
-    } catch (error) {
-      toast.error('Erro ao realizar cadastro');
+    } catch (error: any) {
+      toast.error('Erro ao realizar cadastro:', error);
+    } finally {
+      setIsLoading(false); // Desativa o loading após a resposta
     }
   };
 
@@ -52,7 +58,9 @@ const Register: React.FC = () => {
             required
             autoComplete="password"
           />
-          <button type="submit">Cadastrar</button>
+          <button type="submit" disabled={isLoading}>
+            {isLoading ? 'Carregando...' : 'Cadastrar'} {/* Exibe o texto de carregamento */}
+          </button>
           <span className="redirect">
             Já tem login?
             <a href="/login">Clique aqui</a>
