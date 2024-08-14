@@ -22,10 +22,10 @@ const CustomOrder: React.FC = () => {
         const fetchData = async () => {
             try {
                 const [sizesResponse, creamsResponse, fruitsResponse, toppingsResponse] = await Promise.all([
-                    axios.get('http://localhost:3000/api/sizes'),
-                    axios.get('http://localhost:3000/api/creams'),
-                    axios.get('http://localhost:3000/api/fruits'),
-                    axios.get('http://localhost:3000/api/toppings')
+                    axios.get('https://tropical-acai-back.onrender.com/api/sizes'),
+                    axios.get('https://tropical-acai-back.onrender.com/api/creams'),
+                    axios.get('https://tropical-acai-back.onrender.com/api/fruits'),
+                    axios.get('https://tropical-acai-back.onrender.com/api/toppings')
                 ]);
 
                 setSizes(sizesResponse.data);

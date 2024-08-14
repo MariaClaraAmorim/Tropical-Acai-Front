@@ -96,7 +96,7 @@ const AdminOrders: React.FC = () => {
     useEffect(() => {
         const fetchOrders = async () => {
             try {
-                const response = await axios.get('http://localhost:3000/api/orders');
+                const response = await axios.get('https://tropical-acai-back.onrender.com/api/orders');
                 const ordersWithParsedAddress = response.data.map((order: Order) => ({
                     ...order,
                     deliveryAddress: typeof order.deliveryAddress === 'string'
@@ -158,7 +158,7 @@ const AdminOrders: React.FC = () => {
 
     const handleAccept = async (orderId: string) => {
         try {
-            await axios.put(`http://localhost:3000/api/orders/${orderId}/accept`);
+            await axios.put(`https://tropical-acai-back.onrender.com/api/orders/${orderId}/accept`);
             setOrders(orders.map(order => order.id === orderId ? { ...order, status: 'em preparo' } : order));
             toast.success('Pedido em preparação');
         } catch (error) {
@@ -169,7 +169,7 @@ const AdminOrders: React.FC = () => {
     const handleFinalize = async (orderId: string, deliveryMethod: string) => {
         try {
             const newStatus = deliveryMethod === 'pickup' ? 'pronto para retirada' : 'saiu para entrega';
-            await axios.put(`http://localhost:3000/api/orders/${orderId}/finalize`);
+            await axios.put(`https://tropical-acai-back.onrender.com/api/orders/${orderId}/finalize`);
             setOrders(orders.map(order => order.id === orderId ? { ...order, status: newStatus } : order));
             toast.success(`Pedido ${newStatus === 'pronto para retirada' ? 'pronto para retirada' : 'saiu para entrega'}`);
         } catch (error) {
@@ -179,7 +179,7 @@ const AdminOrders: React.FC = () => {
 
     const handleCancel = async (orderId: string) => {
         try {
-            await axios.put(`http://localhost:3000/api/orders/${orderId}/cancel`);
+            await axios.put(`https://tropical-acai-back.onrender.com/api/orders/${orderId}/cancel`);
             setOrders(orders.map(order => order.id === orderId ? { ...order, status: 'Cancelado' } : order));
             toast.success('Order Cancelado');
         } catch (error) {

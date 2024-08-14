@@ -66,7 +66,7 @@ export const useCustomOrders = () => {
     useEffect(() => {
         const fetchCustomOrders = async () => {
             try {
-                const response = await axios.get('http://localhost:3000/api/order/custom'); 
+                const response = await axios.get('https://tropical-acai-back.onrender.com/api/order/custom'); 
                 console.log(response.data); 
                 setCustomOrders(response.data);
             } catch (err) {
@@ -91,7 +91,7 @@ export const useOrders = () => {
     useEffect(() => {
         const fetchOrders = async () => {
             try {
-                const response = await axios.get('http://localhost:3000/api/orders');
+                const response = await axios.get('https://tropical-acai-back.onrender.com/api/orders');
                 setOrders(response.data);
             } catch (err) {
                 setError('Falha ao buscar pedidos');

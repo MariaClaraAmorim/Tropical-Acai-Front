@@ -18,7 +18,7 @@ const RegisterUser: React.FC = () => {
         event.preventDefault();
 
         try {
-            await axios.post('http://localhost:3000/api/register', {
+            await axios.post('https://tropical-acai-back.onrender.com/api/register', {
                 email,
                 password,
                 name,

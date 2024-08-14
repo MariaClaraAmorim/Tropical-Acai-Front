@@ -5,7 +5,7 @@ const useOrderCount = () => {
 
     const fetchOrderCount = useCallback(async (clientId: string) => {
         try {
-            const response = await fetch(`http://localhost:3000/api/orders/${clientId}/count`);
+            const response = await fetch(`https://tropical-acai-back.onrender.com/api/orders/${clientId}/count`);
             if (!response.ok) {
                 const errorData = await response.json();
                 console.error('Error fetching order count:', errorData);

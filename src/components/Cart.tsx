@@ -130,7 +130,7 @@ const Cart: React.FC<{ isOpen: boolean; toggleCart: () => void }> = ({ isOpen, t
         console.log('Order Data:', orderData);
 
         try {
-            const response = await axios.post('http://localhost:3000/api/orders', orderData);
+            const response = await axios.post('https://tropical-acai-back.onrender.com/api/orders', orderData);
             console.log('Pedido realizado com sucesso:', response.data);
             toast.success('Pedido realizado com sucesso!');
             clearCart();
@@ -144,7 +144,7 @@ const Cart: React.FC<{ isOpen: boolean; toggleCart: () => void }> = ({ isOpen, t
     const handleApplyCoupon = async () => {
         if (canApplyCoupon) {
             try {
-                const response = await fetch('http://localhost:3000/api/cupom/apply', {
+                const response = await fetch('https://tropical-acai-back.onrender.com/api/cupom/apply', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -221,7 +221,7 @@ const Cart: React.FC<{ isOpen: boolean; toggleCart: () => void }> = ({ isOpen, t
                 uf: addressData.state,
             });
 
-            const feeResponse = await fetch(`http://localhost:3000/api/orders/delivery-fee`, {
+            const feeResponse = await fetch(`https://tropical-acai-back.onrender.com/api/orders/delivery-fee`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

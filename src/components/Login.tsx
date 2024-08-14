@@ -19,7 +19,7 @@ const Login: React.FC<LoginProps> = ({ setIsLoggedIn, setUserType, setClientId }
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3000/api/login', { email, password });
+      const response = await axios.post('https://tropical-acai-back.onrender.com/api/login', { email, password });
       const { clientId, userType } = response.data;
 
       if (clientId && userType) {

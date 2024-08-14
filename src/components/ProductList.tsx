@@ -23,7 +23,7 @@ const Catalog: React.FC = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await axios.get('http://localhost:3000/api/products');
+                const response = await axios.get('https://tropical-acai-back.onrender.com/api/products');
                 console.log('Produtos encontrados:', response.data);
                 setProducts(response.data);
             } catch (error) {

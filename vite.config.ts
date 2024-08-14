@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://localhost:3000', // URL do backend
+        target: 'https://tropical-acai-back.onrender.com', // URL do backend
         changeOrigin: true,
         secure: false,
       },

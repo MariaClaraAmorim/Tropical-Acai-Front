@@ -2,7 +2,7 @@ import axios from 'axios';
 import { RegisterRequest, LoginRequest, LoginResponse } from '../types/Auth';
 import { OrderCountResponse } from '../types/Order';
 
-const API_BASE_URL = 'http://localhost:3000/api';
+const API_BASE_URL = 'https://tropical-acai-back.onrender.com/api';
 
 interface OrderProduct {
     id: string;
