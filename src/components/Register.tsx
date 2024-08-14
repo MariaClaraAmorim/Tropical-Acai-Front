@@ -33,6 +33,8 @@ const Register: React.FC = () => {
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
+            autoComplete="name"
+
           />
           <input className="inputsLogin"
             type="email"
@@ -40,6 +42,7 @@ const Register: React.FC = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
+            autoComplete="email"
           />
           <input className="inputsLogin"
             type="password"
@@ -47,6 +50,7 @@ const Register: React.FC = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            autoComplete="password"
           />
           <button type="submit">Cadastrar</button>
           <span className="redirect">

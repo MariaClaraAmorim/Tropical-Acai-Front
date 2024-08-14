@@ -52,6 +52,7 @@ const Login: React.FC<LoginProps> = ({ setIsLoggedIn, setUserType, setClientId }
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
+            autoComplete="email"
           />
           <input className="inputsLogin"
             type="password"
@@ -59,6 +60,7 @@ const Login: React.FC<LoginProps> = ({ setIsLoggedIn, setUserType, setClientId }
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            autoComplete="password"
           />
           <button type="submit">Login</button>
 
