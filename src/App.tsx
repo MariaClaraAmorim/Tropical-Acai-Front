@@ -51,7 +51,7 @@ const App: React.FC = () => {
           <Routes>
             {!isLoggedIn ? (
               <>
-                <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} setUserType={setUserType} setClientId={setClientId} setName={setClientName} />} />
+                <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} setUserType={setUserType} setClientId={setClientId} setClientName={setClientName} />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/" element={<Navigate to="/login" />} />
               </>

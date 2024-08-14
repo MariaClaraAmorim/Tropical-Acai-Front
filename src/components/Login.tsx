@@ -9,18 +9,18 @@ interface LoginProps {
   setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
   setUserType: React.Dispatch<React.SetStateAction<string | null>>;
   setClientId: React.Dispatch<React.SetStateAction<string | null>>;
-  setName: React.Dispatch<React.SetStateAction<string | null>>;
+  setClientName: React.Dispatch<React.SetStateAction<string | null>>; 
 }
 
-const Login: React.FC<LoginProps> = ({ setIsLoggedIn, setUserType, setClientId, setName }) => {
+const Login: React.FC<LoginProps> = ({ setIsLoggedIn, setUserType, setClientId, setClientName }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false); // Estado de carregamento
+  const [loading, setLoading] = useState(false); 
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true); // Inicia o carregamento
+    setLoading(true); 
     try {
       const response = await axios.post('https://tropical-acai-back.onrender.com/api/login', { email, password });
       const { clientId, userType, name } = response.data;
@@ -34,7 +34,7 @@ const Login: React.FC<LoginProps> = ({ setIsLoggedIn, setUserType, setClientId, 
         setIsLoggedIn(true);
         setUserType(userType);
         setClientId(clientId);
-        setName(name);
+        setClientName(name);
 
         toast.success('Login realizado com sucesso');
         navigate('/home');
@@ -44,7 +44,7 @@ const Login: React.FC<LoginProps> = ({ setIsLoggedIn, setUserType, setClientId, 
     } catch (error) {
       toast.error('Erro de login');
     } finally {
-      setLoading(false); // Finaliza o carregamento
+      setLoading(false); 
     }
   };
 
