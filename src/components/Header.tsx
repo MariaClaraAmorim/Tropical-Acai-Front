@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import Cart from './Cart';
 import { Link } from 'react-router-dom';
 import "./header.css";
 import logo from '../../public/logo2.png';
-import { FaHome, FaShoppingCart } from 'react-icons/fa';
+import { FaShoppingCart } from 'react-icons/fa';
 import { RiCoupon2Line } from 'react-icons/ri';
 import { CiSettings } from "react-icons/ci";
 import { BiLogOut } from 'react-icons/bi';
@@ -17,8 +16,8 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ handleLogout }) => {
-    const navigate = useNavigate();
     const userRole = localStorage.getItem('userType');
+    const clientName = localStorage.getItem('clientName');
 
     const [isCartOpen, setIsCartOpen] = useState(false);
     const { cart } = useCart();
@@ -54,6 +53,7 @@ const Header: React.FC<HeaderProps> = ({ handleLogout }) => {
                             <CiSettings />
                             <p className="none">Configuração</p>
                         </Link>
+
                         <button onClick={handleLogout}>
                             <BiLogOut />
                             <p className="none">Logout</p>
@@ -78,6 +78,7 @@ const Header: React.FC<HeaderProps> = ({ handleLogout }) => {
                             <RiCoupon2Line />
                             <p className="none">Pedidos</p>
                         </Link>
+                        <h1>Bem vindo, {clientName}</h1>
                         <button onClick={handleLogout}>
                             <BiLogOut />
                             <p className="none">Logout</p>

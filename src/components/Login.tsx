@@ -9,20 +9,21 @@ interface LoginProps {
   setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
   setUserType: React.Dispatch<React.SetStateAction<string | null>>;
   setClientId: React.Dispatch<React.SetStateAction<string | null>>;
-  setClientName: React.Dispatch<React.SetStateAction<string | null>>; 
+  setClientName: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
 const Login: React.FC<LoginProps> = ({ setIsLoggedIn, setUserType, setClientId, setClientName }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false); 
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true); 
+    setLoading(true);
     try {
       const response = await axios.post('https://tropical-acai-back.onrender.com/api/login', { email, password });
+      console.log('API Response:', response.data); 
       const { clientId, userType, name } = response.data;
 
       if (clientId && userType) {
@@ -44,7 +45,7 @@ const Login: React.FC<LoginProps> = ({ setIsLoggedIn, setUserType, setClientId, 
     } catch (error) {
       toast.error('Erro de login');
     } finally {
-      setLoading(false); 
+      setLoading(false);
     }
   };
 
