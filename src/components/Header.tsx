@@ -53,6 +53,8 @@ const Header: React.FC<HeaderProps> = ({ handleLogout }) => {
                             <CiSettings />
                             <p className="none">Configuração</p>
                         </Link>
+                        
+                        <p>Bem vindo, {clientName}</p>
 
                         <button onClick={handleLogout}>
                             <BiLogOut />
@@ -78,7 +80,7 @@ const Header: React.FC<HeaderProps> = ({ handleLogout }) => {
                             <RiCoupon2Line />
                             <p className="none">Pedidos</p>
                         </Link>
-                        <h1>Bem vindo, {clientName}</h1>
+                        <p>Bem vindo, {clientName}</p>
                         <button onClick={handleLogout}>
                             <BiLogOut />
                             <p className="none">Logout</p>
