@@ -10,7 +10,7 @@ export const WebSocketProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     const [messages, setMessages] = useState<any[]>([]);
 
     useEffect(() => {
-        const ws = new WebSocket('ws://localhost:3000/ws');
+        const ws = new WebSocket('ws://tropical-acai-back.onrender.com/ws');
 
         ws.onopen = () => {
             console.log('Conectado ao servidor WebSocket');
@@ -34,7 +34,7 @@ export const WebSocketProvider: React.FC<{ children: React.ReactNode }> = ({ chi
         };
     }, []);
     useEffect(() => {
-        const ws = new WebSocket('ws://localhost:3000/ws');
+        const ws = new WebSocket('ws://tropical-acai-back.onrender.com/ws');
 
         ws.onopen = () => {
             console.log('Connected to WebSocket server');

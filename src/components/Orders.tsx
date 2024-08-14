@@ -144,7 +144,7 @@ const Orders: React.FC = () => {
         fetchClientData();
 
         if (!ws) {
-            const websocket = new WebSocket('ws://localhost:3000');
+            const websocket = new WebSocket('ws://tropical-acai-back.onrender.com');
             websocket.onopen = () => {
                 console.log('WebSocket connection established');
             };

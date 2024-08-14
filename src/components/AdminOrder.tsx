@@ -116,7 +116,7 @@ const AdminOrders: React.FC = () => {
         fetchOrders();
 
         if (!ws) {
-            const websocket = new WebSocket('ws://localhost:3000');
+            const websocket = new WebSocket('ws://tropical-acai-back.onrender.com');
             websocket.onopen = () => {
                 console.log('WebSocket connection established');
             };
@@ -241,7 +241,7 @@ const AdminOrders: React.FC = () => {
                 <tbody>
                     <tr>
                         <td>{order.size ? `Tamanho: ${order.size.name} ${order.size.volume ? `${order.size.volume}ml` : ''}` : 'N/A'}</td>
-                        <td>{order.cream ? `${order.cream.name} - R$ ${order.cream.price.toFixed(2)}` : 'N/A'}</td>
+                        <td>{order.cream ? `${order.cream.name}` : 'N/A'}</td>
                         <td>{order.fruits && order.fruits.length > 0 ? order.fruits.map((fruitOrder) => fruitOrder.fruit?.name || 'Nome não informado').join(', ') : 'N/A'}</td>
                         <td>{order.toppings && order.toppings.length > 0 ? order.toppings.map((toppingOrder) => toppingOrder.topping?.name || 'Nome não informado').join(', ') : 'N/A'}</td>
                         <td>
