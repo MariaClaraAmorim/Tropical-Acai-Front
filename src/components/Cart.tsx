@@ -65,6 +65,7 @@ const Cart: React.FC<{ isOpen: boolean; toggleCart: () => void }> = ({ isOpen, t
         }
 
         const totalAmountRounded = parseFloat(cart.totalAmount.toFixed(2));
+        const clientName = localStorage.getItem('clientName'); // Recupera o nome do cliente
 
         // Separar itens normais dos personalizados
         const customOrders = cart.items.filter(item => item.customOrder);
@@ -72,6 +73,7 @@ const Cart: React.FC<{ isOpen: boolean; toggleCart: () => void }> = ({ isOpen, t
 
         let orderData: any = {
             clientId,
+            clientName, // Adiciona o nome do cliente ao pedido
             deliveryMethod: address ? 'delivery' : 'pickup',
             deliveryAddress: address ? {
                 cep: address.cep.replace('-', ''),
@@ -85,7 +87,6 @@ const Cart: React.FC<{ isOpen: boolean; toggleCart: () => void }> = ({ isOpen, t
             total: totalAmountRounded,
             couponCode: isCouponApplied ? couponCode : undefined,
         };
-
 
         // Adicionar itens normais ao pedido
         if (normalOrders.length > 0) {

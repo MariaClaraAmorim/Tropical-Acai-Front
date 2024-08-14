@@ -22,7 +22,7 @@ const Register: React.FC = () => {
       toast.success('Cadastro realizado com sucesso');
       navigate('/login');
     } catch (error: any) {
-      toast.error('Erro ao realizar cadastro:', error);
+      toast.error('Erro ao realizar cadastro', error);
     } finally {
       setLoading(false); // Finaliza o carregamento
     }
