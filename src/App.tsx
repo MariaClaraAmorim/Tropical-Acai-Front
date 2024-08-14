@@ -15,12 +15,14 @@ const App: React.FC = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('loggedIn'));
   const [userType, setUserType] = useState<string | null>(localStorage.getItem('userType'));
   const [clientId, setClientId] = useState<string | null>(localStorage.getItem('clientId'));
+  const [name, setName] = useState<string | null>(localStorage.getItem('clientName')); 
 
   useEffect(() => {
     const handleStorageChange = () => {
       setIsLoggedIn(!!localStorage.getItem('loggedIn'));
       setUserType(localStorage.getItem('userType'));
       setClientId(localStorage.getItem('clientId'));
+      setName(localStorage.getItem('clientName')); 
     };
 
     window.addEventListener('storage', handleStorageChange);
@@ -34,9 +36,11 @@ const App: React.FC = () => {
     localStorage.removeItem('loggedIn');
     localStorage.removeItem('userType');
     localStorage.removeItem('clientId');
+    localStorage.removeItem('clientName');
     setIsLoggedIn(false);
     setUserType(null);
     setClientId(null);
+    setName(null);
   };
 
   return (
@@ -47,7 +51,15 @@ const App: React.FC = () => {
           <Routes>
             {!isLoggedIn ? (
               <>
-                <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} setUserType={setUserType} setClientId={setClientId} />} />
+                <Route
+                  path="/login"
+                  element={<Login
+                    setIsLoggedIn={setIsLoggedIn}
+                    setUserType={setUserType}
+                    setClientId={setClientId}
+                    setName={setName}
+                  />}
+                />
                 <Route path="/register" element={<Register />} />
                 <Route path="/" element={<Navigate to="/login" />} />
               </>
@@ -56,10 +68,9 @@ const App: React.FC = () => {
                 <Route path="/" element={<Navigate to={userType === 'ADMIN' ? '/admin' : '/home'} />} />
                 <Route element={<ProtectedRoute isAdmin={true} />}>
                   <Route path="/admin" element={<Home />} />
-                 {/*  <Route path="/catalog" element={<Catalog />} /> */}
+                  {/* <Route path="/catalog" element={<Catalog />} /> */}
                   <Route path="/admin/orders" element={<AdminOrders />} />
                   <Route path="/admin/settings" element={<RegisterUser />} />
-
                 </Route>
                 <Route element={<ProtectedRoute isAdmin={false} />}>
                   <Route path="/home" element={<Home />} />
