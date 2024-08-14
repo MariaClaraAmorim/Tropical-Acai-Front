@@ -92,6 +92,12 @@ const AdminOrders: React.FC = () => {
     const [error, setError] = useState<string | null>(null);
     const [ws, setWs] = useState<WebSocket | null>(null);
     const [filter, setFilter] = useState<'Todos' | 'Completo' | 'Cancelado' | 'Aguardando'>('Todos');
+    const [clientName, setClientName] = useState<string | null>(null);
+
+    useEffect(() => {
+        const name = localStorage.getItem('clientName');
+        setClientName(name);
+    }, []);
 
     useEffect(() => {
         const fetchOrders = async () => {
@@ -162,7 +168,7 @@ const AdminOrders: React.FC = () => {
             setOrders(orders.map(order => order.id === orderId ? { ...order, status: 'em preparo' } : order));
             toast.success('Pedido em preparação');
         } catch (error) {
-            toast.error('Failed to update the order status');
+            toast.error('Falha ao aceitar pedido');
         }
     };
 
@@ -181,7 +187,7 @@ const AdminOrders: React.FC = () => {
         try {
             await axios.put(`https://tropical-acai-back.onrender.com/api/orders/${orderId}/cancel`);
             setOrders(orders.map(order => order.id === orderId ? { ...order, status: 'Cancelado' } : order));
-            toast.success('Order Cancelado');
+            toast.success('Pedido Cancelado');
         } catch (error) {
             toast.error('Falha ao cancelar pedido');
         }
@@ -347,6 +353,7 @@ const AdminOrders: React.FC = () => {
                 {filteredOrders.map((order) => (
                     <div className="order-card" key={order.id}>
                         <p className="status">Status: {order.status}</p>
+                        <p>Nome do Cliente: {clientName}</p>
                         <p>Total: R$ {typeof order.total === 'number' ? order.total.toFixed(2) : 'N/A'}</p>
                         <p>Entrega: {order.deliveryMethod}</p>
                         <p>Endereço: {formatAddress(order.deliveryAddress)}</p>

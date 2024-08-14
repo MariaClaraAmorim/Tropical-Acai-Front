@@ -9,9 +9,10 @@ interface LoginProps {
   setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
   setUserType: React.Dispatch<React.SetStateAction<string | null>>;
   setClientId: React.Dispatch<React.SetStateAction<string | null>>;
+  setName: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
-const Login: React.FC<LoginProps> = ({ setIsLoggedIn, setUserType, setClientId }) => {
+const Login: React.FC<LoginProps> = ({ setIsLoggedIn, setUserType, setClientId, setName }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
@@ -20,16 +21,18 @@ const Login: React.FC<LoginProps> = ({ setIsLoggedIn, setUserType, setClientId }
     e.preventDefault();
     try {
       const response = await axios.post('https://tropical-acai-back.onrender.com/api/login', { email, password });
-      const { clientId, userType } = response.data;
+      const { clientId, userType, name } = response.data;
 
       if (clientId && userType) {
         localStorage.setItem('loggedIn', 'true');
         localStorage.setItem('userType', userType);
         localStorage.setItem('clientId', clientId);
+        localStorage.setItem('clientName', name);
 
         setIsLoggedIn(true);
         setUserType(userType);
         setClientId(clientId);
+        setName(name);
 
         toast.success('Login realizado com sucesso');
         navigate('/home');
