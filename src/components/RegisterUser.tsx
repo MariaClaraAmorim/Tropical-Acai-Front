@@ -13,11 +13,11 @@ const RegisterUser: React.FC = () => {
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
     const [role, setRole] = useState<Role>(Role.USER);
-    const [isLoading, setIsLoading] = useState(false);
+    const [loading, setLoading] = useState(false); // Estado de carregamento
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
-        setIsLoading(true);
+        setLoading(true); // Inicia o carregamento
 
         try {
             await axios.post('https://tropical-acai-back.onrender.com/api/register', {
@@ -34,7 +34,7 @@ const RegisterUser: React.FC = () => {
         } catch (err: any) {
             toast.error(err.response?.data?.error || 'Erro, tente novamente mais tarde');
         } finally {
-            setIsLoading(false); // Desativa o loading após a resposta
+            setLoading(false); // Finaliza o carregamento
         }
     };
 
@@ -94,7 +94,9 @@ const RegisterUser: React.FC = () => {
                         color: 'var(--secondary-color)',
                         padding: '10px',
                         fontSize: '18px'
-                    }} type="submit" disabled={isLoading}>  {isLoading ? 'Carregando...' : 'Cadastrar'}</button>
+                    }} type="submit" disabled={loading} className={loading ? 'loading' : ''}>
+                        {loading ? 'Carregando...' : 'Cadastrar'}
+                    </button>
                 </form>
             </div>
         </div >

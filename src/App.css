@@ -16,24 +16,26 @@
     background: url('../public/background.png') no-repeat center center fixed;
     background-size: cover;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    overflow: hidden; 
+    overflow: hidden;
 }
+
 .register {
     display: flex;
     flex-direction: column;
     align-items: center;
-    overflow: hidden; 
+    overflow: hidden;
 }
 
 .loginContent,
 .registerContent {
-    margin-top: 70px; 
+    margin-top: 70px;
     padding: 20px;
     width: 100%;
-    max-width: 400px; 
+    max-width: 400px;
 }
 
 @media (max-width: 768px) {
+
     .loginContent,
     .registerContent {
         padding: 20px;
@@ -75,6 +77,11 @@ button {
 
 button:hover {
     background-color: #5a1357;
+}
+
+button.loading {
+    cursor: not-allowed;
+    /* Altera o cursor para "não permitido" */
 }
 
 .redirect {

@@ -15,17 +15,17 @@ interface LoginProps {
 const Login: React.FC<LoginProps> = ({ setIsLoggedIn, setUserType, setClientId, setName }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+  const [loading, setLoading] = useState(false); // Estado de carregamento
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true);
+    setLoading(true); // Inicia o carregamento
     try {
       const response = await axios.post('https://tropical-acai-back.onrender.com/api/login', { email, password });
       const { clientId, userType, name } = response.data;
 
-      if (clientId && userType && name) {
+      if (clientId && userType) {
         localStorage.setItem('loggedIn', 'true');
         localStorage.setItem('userType', userType);
         localStorage.setItem('clientId', clientId);
@@ -44,7 +44,7 @@ const Login: React.FC<LoginProps> = ({ setIsLoggedIn, setUserType, setClientId, 
     } catch (error) {
       toast.error('Erro de login');
     } finally {
-      setIsLoading(false); // Desativa o loading após a resposta
+      setLoading(false); // Finaliza o carregamento
     }
   };
 
@@ -53,7 +53,8 @@ const Login: React.FC<LoginProps> = ({ setIsLoggedIn, setUserType, setClientId, 
       <div className="loginContent">
         <h2>Login</h2>
         <form onSubmit={handleSubmit}>
-          <input className="inputsLogin"
+          <input
+            className="inputsLogin"
             type="email"
             placeholder="Email"
             value={email}
@@ -61,7 +62,8 @@ const Login: React.FC<LoginProps> = ({ setIsLoggedIn, setUserType, setClientId, 
             required
             autoComplete="email"
           />
-          <input className="inputsLogin"
+          <input
+            className="inputsLogin"
             type="password"
             placeholder="Senha"
             value={password}
@@ -69,15 +71,14 @@ const Login: React.FC<LoginProps> = ({ setIsLoggedIn, setUserType, setClientId, 
             required
             autoComplete="password"
           />
-          <button type="submit" disabled={isLoading}>
-            {isLoading ? 'Carregando...' : 'Login'} {/* Exibe o texto de carregamento */}
+          <button type="submit" disabled={loading} className={loading ? 'loading' : ''}>
+            {loading ? 'Carregando...' : 'Login'}
           </button>
 
           <span className="redirect">
             Ainda não fez seu cadastro?
             <a href="/register">Clique aqui</a>
           </span>
-
         </form>
       </div>
     </div>
