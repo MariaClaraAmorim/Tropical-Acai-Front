@@ -23,7 +23,7 @@ const Login: React.FC<LoginProps> = ({ setIsLoggedIn, setUserType, setClientId, 
       const response = await axios.post('https://tropical-acai-back.onrender.com/api/login', { email, password });
       const { clientId, userType, name } = response.data;
 
-      if (clientId && userType) {
+      if (clientId && userType && name) {
         localStorage.setItem('loggedIn', 'true');
         localStorage.setItem('userType', userType);
         localStorage.setItem('clientId', clientId);
