@@ -24,13 +24,13 @@ const RegisterUser: React.FC = () => {
                 name,
                 role,
             });
-            toast.success('User registered successfully!');
+            toast.success('Usuário cadastrado com sucesso!');
             setEmail('');
             setPassword('');
             setName('');
             setRole(Role.USER);
         } catch (err: any) {
-            toast.error(err.response?.data?.error || 'An error occurred');
+            toast.error(err.response?.data?.error || 'Erro, tente novamente mais tarde');
         }
     };
 
