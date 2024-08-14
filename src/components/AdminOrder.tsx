@@ -116,13 +116,13 @@ const AdminOrders: React.FC = () => {
         fetchOrders();
 
         if (!ws) {
-            const websocket = new WebSocket('ws://tropical-acai-back.onrender.com');
+            const websocket = new WebSocket('wss://tropical-acai-back.onrender.com');
             websocket.onopen = () => {
                 console.log('WebSocket connection established');
             };
             websocket.onmessage = (event) => {
                 const data = JSON.parse(event.data);
-                console.log('WebSocket data received:', data); // Verifique os dados recebidos
+                console.log('WebSocket data received:', data);
 
                 if (data.type === 'new_order') {
                     setOrders(prevOrders => {
