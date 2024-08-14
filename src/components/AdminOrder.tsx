@@ -68,10 +68,11 @@ interface ToppingOrder {
 interface Order {
     id: string;
     clientId: string;
+    clientName: string;
     total: number;
     couponId: string | null;
     deliveryMethod: string;
-    deliveryAddress: string; // JSON string, parse as needed
+    deliveryAddress: string;
     deliveryFee: number;
     createdAt: string;
     updatedAt: string;
@@ -92,12 +93,6 @@ const AdminOrders: React.FC = () => {
     const [error, setError] = useState<string | null>(null);
     const [ws, setWs] = useState<WebSocket | null>(null);
     const [filter, setFilter] = useState<'Todos' | 'Completo' | 'Cancelado' | 'Aguardando'>('Todos');
-    const [clientName, setClientName] = useState<string | null>(null);
-
-    useEffect(() => {
-        const name = localStorage.getItem('clientName');
-        setClientName(name);
-    }, []);
 
     useEffect(() => {
         const fetchOrders = async () => {
@@ -111,7 +106,6 @@ const AdminOrders: React.FC = () => {
                 }));
                 setOrders(ordersWithParsedAddress);
                 setLoading(false);
-                console.log(" oi", response)
 
             } catch (error) {
                 setError('Failed to fetch orders');
@@ -353,7 +347,7 @@ const AdminOrders: React.FC = () => {
                 {filteredOrders.map((order) => (
                     <div className="order-card" key={order.id}>
                         <p className="status">Status: {order.status}</p>
-                        <p>Nome do Cliente: {clientName}</p>
+                        <p>Cliente: {order.clientName}</p>
                         <p>Total: R$ {typeof order.total === 'number' ? order.total.toFixed(2) : 'N/A'}</p>
                         <p>Entrega: {order.deliveryMethod}</p>
                         <p>Endereço: {formatAddress(order.deliveryAddress)}</p>
