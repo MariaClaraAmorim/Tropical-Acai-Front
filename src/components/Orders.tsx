@@ -220,7 +220,9 @@ const Orders: React.FC = () => {
                 <p className="status">Status: {order.status}</p>
                 <p>Total: R$ {order.total.toFixed(2)}</p>
                 <p>Entrega: {order.deliveryMethod}</p>
-                <p>Endereço: {formatAddress(order.deliveryAddress)}</p>
+                {order.deliveryMethod === 'delivery' && (
+                    <p>Endereço de Entrega: {formatAddress(order.deliveryAddress)}</p>
+                )}                
                 <p>Taxa de Entrega: R$ {order.deliveryFee.toFixed(2)}</p>
                 <p>Data do Pedido: {new Date(order.createdAt).toLocaleString()}</p>
 

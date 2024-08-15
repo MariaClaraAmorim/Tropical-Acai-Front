@@ -40,7 +40,7 @@ const Header: React.FC<HeaderProps> = ({ handleLogout }) => {
                             <IoHomeOutline />
                             <p className="none">Home</p>
                         </Link>
-                        <Link to="/catalogAdm">
+                        <Link to="/admin/catalog">
                             <MdOutlineProductionQuantityLimits />
                             <p className="none">Produtos</p>
                         </Link>
