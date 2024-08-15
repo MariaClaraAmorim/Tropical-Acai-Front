@@ -92,6 +92,7 @@ const AdminOrders: React.FC = () => {
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
     const [ws, setWs] = useState<WebSocket | null>(null);
+    const [deliveryMethod, setDeliveryMethod] = useState<'pickup' | 'delivery'>('pickup');
     const [filter, setFilter] = useState<'Todos' | 'Completo' | 'Cancelado' | 'Aguardando'>('Todos');
 
     const fetchOrders = async () => {
@@ -355,7 +356,13 @@ const AdminOrders: React.FC = () => {
                             <p>Cliente: {order.clientName}</p>
                             <p>Total: R$ {typeof order.total === 'number' ? order.total.toFixed(2) : 'N/A'}</p>
                             <p>Entrega: {order.deliveryMethod}</p>
-                            <p>Endereço: {formatAddress(order.deliveryAddress)}</p>
+                            <p>Endereço:
+                                {deliveryMethod === "delivery"
+                                    ? (order.deliveryAddress ? ` ${formatAddress(order.deliveryAddress)}` : "Endereço não disponível")
+                                    : "O cliente optou por retirada"
+                                }
+                            </p>
+
                             <p>Taxa de Entrega: R$ {order.deliveryFee != null ? order.deliveryFee.toFixed(2) : 'N/A'}</p>
                             <p>Data do Pedido: {new Date(order.createdAt).toLocaleString()}</p>
                             {renderProductOrder(order)}

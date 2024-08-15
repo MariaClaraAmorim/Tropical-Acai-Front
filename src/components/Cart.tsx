@@ -314,37 +314,44 @@ const Cart: React.FC<{ isOpen: boolean; toggleCart: () => void }> = ({ isOpen, t
                         </label>
                     </div>
 
-                    {address ? (
-                        <div className="cart-summary">
-                            <h3>Endereço</h3>
-                            <p>{address.logradouro}, {address.bairro}, N° {numero}</p>
-                            <p>{address.localidade} - {address.uf}</p>
-                        </div>
-                    ) : (
-                        <div className="cep-search">
-                            <input
-                                type="text"
-                                placeholder="Digite seu CEP"
-                                value={cep}
-                                onChange={(e) => setCep(e.target.value)}
-                            />
+                    {deliveryMethod === "delivery" && (
+                        <>
+                            {address ? (
+                                <div className="cart-summary">
+                                    <h3>Endereço</h3>
+                                    <p>{address.logradouro}, {address.bairro}, N° {numero}</p>
+                                    <p>{address.localidade} - {address.uf}</p>
+                                </div>
+                            ) : (
+                                <div className="cep-search">
+                                    <input
+                                        type="text"
+                                        placeholder="Digite seu CEP"
+                                        value={cep}
+                                        onChange={(e) => setCep(e.target.value)}
+                                    />
 
-                            <input
-                                type="text"
-                                placeholder="Número"
-                                value={numero}
-                                onChange={(e) => setNumero(e.target.value)}
-                            />
+                                    <input
+                                        type="text"
+                                        placeholder="Número"
+                                        value={numero}
+                                        onChange={(e) => setNumero(e.target.value)}
+                                    />
 
-                            <button onClick={handleCepSearch} style={{
-                                backgroundColor: 'var(--primary-color)',
-                                color: 'var(--secondary-color)',
-                                padding: '5px',
-                                fontSize: '18px',
-                            }}>Buscar</button>
-
-                        </div>
-
+                                    <button
+                                        onClick={handleCepSearch}
+                                        style={{
+                                            backgroundColor: 'var(--primary-color)',
+                                            color: 'var(--secondary-color)',
+                                            padding: '5px',
+                                            fontSize: '18px',
+                                        }}
+                                    >
+                                        Buscar
+                                    </button>
+                                </div>
+                            )}
+                        </>
                     )}
 
                     {canApplyCoupon && (
