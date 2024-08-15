@@ -60,7 +60,12 @@ const Cart: React.FC<{ isOpen: boolean; toggleCart: () => void }> = ({ isOpen, t
             return;
         }
 
-        if (address && !numero) {
+        if (deliveryMethod === 'delivery' && !address) {
+            toast.error('Por favor, insira o endereço para entrega.');
+            return;
+        }
+
+        if (deliveryMethod === 'delivery' && !numero) {
             toast.error('Por favor, insira o número da casa.');
             return;
         }
@@ -75,8 +80,8 @@ const Cart: React.FC<{ isOpen: boolean; toggleCart: () => void }> = ({ isOpen, t
         let orderData: any = {
             clientId,
             clientName, // Adiciona o nome do cliente ao pedido
-            deliveryMethod: address ? 'delivery' : 'pickup',
-            deliveryAddress: address ? {
+            deliveryMethod: deliveryMethod,
+            deliveryAddress: deliveryMethod === 'delivery' ? {
                 cep: address.cep.replace('-', ''),
                 logradouro: address.logradouro,
                 complemento: address.complemento || '',

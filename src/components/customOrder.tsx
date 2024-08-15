@@ -181,7 +181,7 @@ const CustomOrder: React.FC = () => {
                 )) : <p className="loading">Carregando adicionais pagos...</p>}
             </div>
 
-            <div className="section">
+            <div className="sectionAdd">
                 <h2 className="total">Total: R${calculateTotal().toFixed(2)}</h2>
                 <button className="button" onClick={handleAddToCart}>Adicionar ao Carrinho</button>
             </div>
