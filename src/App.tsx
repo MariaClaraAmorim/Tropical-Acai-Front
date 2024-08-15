@@ -60,6 +60,7 @@ const App: React.FC = () => {
                 <Route path="/" element={<Navigate to={userType === 'ADMIN' ? '/admin' : '/home'} />} />
                 <Route element={<ProtectedRoute isAdmin={true} />}>
                   <Route path="/admin" element={<Home />} />
+                  <Route path="/admin/catalog" element={<Catalog />} />
                   <Route path="/admin/orders" element={<AdminOrders />} />
                   <Route path="/admin/settings" element={<RegisterUser />} />
                 </Route>

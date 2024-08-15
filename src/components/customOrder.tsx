@@ -151,7 +151,7 @@ const CustomOrder: React.FC = () => {
                             checked={selectedToppings.some(t => t.id === topping.id)}
                             onChange={(e) => {
                                 if (e.target.checked) {
-                                    setSelectedToppings([...selectedToppings, topping]);
+                                    setSelectedToppings([topping]);
                                 } else {
                                     setSelectedToppings(selectedToppings.filter(t => t.id !== topping.id));
                                 }
@@ -161,7 +161,7 @@ const CustomOrder: React.FC = () => {
                     </label>
                 )) : <p className="loading">Nenhum adicional grátis disponível</p>}
 
-                <h3  className="label">Pagos</h3>
+                <h3 className="label">Pagos</h3>
                 {paidToppings.length > 0 ? paidToppings.map(topping => (
                     <label key={topping.id} className="label">
                         <input

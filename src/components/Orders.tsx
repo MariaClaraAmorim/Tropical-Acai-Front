@@ -140,9 +140,7 @@ const Orders: React.FC = () => {
         }
     };
 
-    useEffect(() => {
-        fetchClientData();
-
+    const connectWebSocket = () => {
         if (!ws) {
             const websocket = new WebSocket('wss://tropical-acai-back.onrender.com');
             websocket.onopen = () => {
@@ -169,10 +167,17 @@ const Orders: React.FC = () => {
                 } else {
                     console.error('WebSocket connection closed with error', event.reason);
                 }
+                // Reconnect after 5 seconds
+                setTimeout(connectWebSocket, 5000);
             };
 
             setWs(websocket);
         }
+    };
+
+    useEffect(() => {
+        fetchClientData();
+        connectWebSocket();
 
         return () => {
             if (ws) {

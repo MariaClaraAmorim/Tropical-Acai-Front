@@ -94,27 +94,24 @@ const AdminOrders: React.FC = () => {
     const [ws, setWs] = useState<WebSocket | null>(null);
     const [filter, setFilter] = useState<'Todos' | 'Completo' | 'Cancelado' | 'Aguardando'>('Todos');
 
-    useEffect(() => {
-        const fetchOrders = async () => {
-            try {
-                const response = await axios.get('https://tropical-acai-back.onrender.com/api/orders');
-                const ordersWithParsedAddress = response.data.map((order: Order) => ({
-                    ...order,
-                    deliveryAddress: typeof order.deliveryAddress === 'string'
-                        ? JSON.parse(order.deliveryAddress)
-                        : order.deliveryAddress,
-                }));
-                setOrders(ordersWithParsedAddress);
-                setLoading(false);
+    const fetchOrders = async () => {
+        try {
+            const response = await axios.get('https://tropical-acai-back.onrender.com/api/orders');
+            const ordersWithParsedAddress = response.data.map((order: Order) => ({
+                ...order,
+                deliveryAddress: typeof order.deliveryAddress === 'string'
+                    ? JSON.parse(order.deliveryAddress)
+                    : order.deliveryAddress,
+            }));
+            setOrders(ordersWithParsedAddress);
+            setLoading(false);
+        } catch (error) {
+            setError('Failed to fetch orders');
+            setLoading(false);
+        }
+    };
 
-            } catch (error) {
-                setError('Failed to fetch orders');
-                setLoading(false);
-            }
-        };
-
-        fetchOrders();
-
+    const connectWebSocket = () => {
         if (!ws) {
             const websocket = new WebSocket('wss://tropical-acai-back.onrender.com');
             websocket.onopen = () => {
@@ -144,10 +141,17 @@ const AdminOrders: React.FC = () => {
                 } else {
                     console.error('WebSocket connection closed with error', event.reason);
                 }
+                // Reconnect after 5 seconds
+                setTimeout(connectWebSocket, 5000);
             };
 
             setWs(websocket);
         }
+    };
+
+    useEffect(() => {
+        fetchOrders();
+        connectWebSocket();
 
         return () => {
             if (ws) {
@@ -344,20 +348,24 @@ const AdminOrders: React.FC = () => {
                 <button onClick={() => setFilter('Aguardando')} className={filter === 'Aguardando' ? 'active' : ''}>Aguardando</button>
             </div>
             <div className="order-cards-container">
-                {filteredOrders.map((order) => (
-                    <div className="order-card" key={order.id}>
-                        <p className="status">Status: {order.status}</p>
-                        <p>Cliente: {order.clientName}</p>
-                        <p>Total: R$ {typeof order.total === 'number' ? order.total.toFixed(2) : 'N/A'}</p>
-                        <p>Entrega: {order.deliveryMethod}</p>
-                        <p>Endereço: {formatAddress(order.deliveryAddress)}</p>
-                        <p>Taxa de Entrega: R$ {order.deliveryFee != null ? order.deliveryFee.toFixed(2) : 'N/A'}</p>
-                        <p>Data do Pedido: {new Date(order.createdAt).toLocaleString()}</p>
-                        {renderProductOrder(order)}
-                        {renderCustomOrder(order)}
-                        {order.couponId && renderStaticProduct(order.id)}
-                    </div>
-                ))}
+                {filteredOrders.length > 0 ? (
+                    filteredOrders.map((order) => (
+                        <div className="order-card" key={order.id}>
+                            <p className="status">Status: {order.status}</p>
+                            <p>Cliente: {order.clientName}</p>
+                            <p>Total: R$ {typeof order.total === 'number' ? order.total.toFixed(2) : 'N/A'}</p>
+                            <p>Entrega: {order.deliveryMethod}</p>
+                            <p>Endereço: {formatAddress(order.deliveryAddress)}</p>
+                            <p>Taxa de Entrega: R$ {order.deliveryFee != null ? order.deliveryFee.toFixed(2) : 'N/A'}</p>
+                            <p>Data do Pedido: {new Date(order.createdAt).toLocaleString()}</p>
+                            {renderProductOrder(order)}
+                            {renderCustomOrder(order)}
+                            {order.couponId && renderStaticProduct(order.id)}
+                        </div>
+                    ))
+                ) : (
+                    <p>Nenhum pedido encontrado com o status selecionado.</p>
+                )}
             </div>
         </div>
     );
