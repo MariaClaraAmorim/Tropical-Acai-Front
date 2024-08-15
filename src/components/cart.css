@@ -41,6 +41,26 @@
     margin: 0;
 }
 
+.delivery-method {
+    margin-top: 20px;
+}
+
+.delivery-method label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.delivery-address {
+    margin-top: 20px;
+}
+
+.delivery-address input {
+    display: block;
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
 .cart-item {
     display: flex;
     justify-content: space-between;
@@ -129,6 +149,7 @@
     font-size: 16px;
     color: var(--primary-color);
 }
+
 .empty-cart-message {
     text-align: center;
     font-size: 18px;

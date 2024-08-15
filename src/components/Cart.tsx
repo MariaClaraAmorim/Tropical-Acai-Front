@@ -19,6 +19,7 @@ const Cart: React.FC<{ isOpen: boolean; toggleCart: () => void }> = ({ isOpen, t
     const [address, setAddress] = useState<any>(null);
     const [numero, setNumero] = useState<string>('');
     const [deliveryFee, setDeliveryFee] = useState<number>(0);
+    const [deliveryMethod, setDeliveryMethod] = useState<'pickup' | 'delivery'>('pickup');
     const [totalWithFee, setTotalWithFee] = useState<number>(0);
     const navigate = useNavigate();
     const clientId = localStorage.getItem('clientId') || '';
@@ -290,6 +291,27 @@ const Cart: React.FC<{ isOpen: boolean; toggleCart: () => void }> = ({ isOpen, t
                         <p>Taxa de entrega: R$ {deliveryFee.toFixed(2)}</p>
                         <p>Total com taxa: R$ {totalWithFee.toFixed(2)}</p>
                         {isCouponApplied && <p>Cupom de fidelidade aplicado: {couponCode}</p>}
+                    </div>
+
+                    <div className="delivery-method">
+                        <label>
+                            <input
+                                type="radio"
+                                value="pickup"
+                                checked={deliveryMethod === 'pickup'}
+                                onChange={() => setDeliveryMethod('pickup')}
+                            />
+                            Retirada no local
+                        </label>
+                        <label>
+                            <input
+                                type="radio"
+                                value="delivery"
+                                checked={deliveryMethod === 'delivery'}
+                                onChange={() => setDeliveryMethod('delivery')}
+                            />
+                            Entrega
+                        </label>
                     </div>
 
                     {address ? (
