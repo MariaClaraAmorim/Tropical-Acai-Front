@@ -356,12 +356,14 @@ const AdminOrders: React.FC = () => {
                             <p>Cliente: {order.clientName}</p>
                             <p>Total: R$ {typeof order.total === 'number' ? order.total.toFixed(2) : 'N/A'}</p>
                             <p>Entrega: {order.deliveryMethod}</p>
-                            <p>Endereço:
+                            {/* <p>Endereço:
                                 {deliveryMethod === "delivery"
                                     ? (order.deliveryAddress ? ` ${formatAddress(order.deliveryAddress)}` : "Endereço não disponível")
                                     : "O cliente optou por retirada"
                                 }
-                            </p>
+                            </p> */}
+                            <p>Endereço de Entrega: {formatAddress(order.deliveryAddress)}</p>
+
 
                             <p>Taxa de Entrega: R$ {order.deliveryFee != null ? order.deliveryFee.toFixed(2) : 'N/A'}</p>
                             <p>Data do Pedido: {new Date(order.createdAt).toLocaleString()}</p>
