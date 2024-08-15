@@ -92,7 +92,7 @@ const AdminOrders: React.FC = () => {
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
     const [ws, setWs] = useState<WebSocket | null>(null);
-    const [deliveryMethod, setDeliveryMethod] = useState<'pickup' | 'delivery'>('pickup');
+    const [deliveryMethod, setDeliveryMethod] = useState<'retirada' | 'delivery'>('retirada');
     const [filter, setFilter] = useState<'Todos' | 'Completo' | 'Cancelado' | 'Aguardando'>('Todos');
 
     const fetchOrders = async () => {
@@ -173,7 +173,7 @@ const AdminOrders: React.FC = () => {
 
     const handleFinalize = async (orderId: string, deliveryMethod: string) => {
         try {
-            const newStatus = deliveryMethod === 'pickup' ? 'pronto para retirada' : 'saiu para entrega';
+            const newStatus = deliveryMethod === 'retirada' ? 'pronto para retirada' : 'saiu para entrega';
             await axios.put(`https://tropical-acai-back.onrender.com/api/orders/${orderId}/finalize`);
             setOrders(orders.map(order => order.id === orderId ? { ...order, status: newStatus } : order));
             toast.success(`Pedido ${newStatus === 'pronto para retirada' ? 'pronto para retirada' : 'saiu para entrega'}`);

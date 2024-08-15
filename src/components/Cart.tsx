@@ -19,7 +19,7 @@ const Cart: React.FC<{ isOpen: boolean; toggleCart: () => void }> = ({ isOpen, t
     const [address, setAddress] = useState<any>(null);
     const [numero, setNumero] = useState<string>('');
     const [deliveryFee, setDeliveryFee] = useState<number>(0);
-    const [deliveryMethod, setDeliveryMethod] = useState<'pickup' | 'delivery'>('pickup');
+    const [deliveryMethod, setDeliveryMethod] = useState<'retirada' | 'delivery'>('retirada');
     const [totalWithFee, setTotalWithFee] = useState<number>(0);
     const navigate = useNavigate();
     const clientId = localStorage.getItem('clientId') || '';
@@ -302,9 +302,9 @@ const Cart: React.FC<{ isOpen: boolean; toggleCart: () => void }> = ({ isOpen, t
                         <label>
                             <input
                                 type="radio"
-                                value="pickup"
-                                checked={deliveryMethod === 'pickup'}
-                                onChange={() => setDeliveryMethod('pickup')}
+                                value="retirada"
+                                checked={deliveryMethod === 'retirada'}
+                                onChange={() => setDeliveryMethod('retirada')}
                             />
                             Retirada no local
                         </label>

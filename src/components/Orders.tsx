@@ -274,7 +274,7 @@ const Orders: React.FC = () => {
             <div className="fidelity-card">
                 <h2>Cartão Fidelidade <FaStar className="star-icon" /></h2>
                 <p>Você fez <span className="orders-count">{total}</span> pedido{total !== 1 ? 's' : ''}.</p>
-                <p>A cada <span className="target-orders">10</span> pedidos e você desbloqueará um cupom!</p>
+                <p>A cada <span className="target-orders">10</span> pedidos você desbloqueará um cupom!</p>
                 {isCouponUnlocked && (
                     <div className="coupon-container">
                         <p>Parabéns! Use na sua próxima compra o cupom:</p>
